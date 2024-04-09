@@ -7,24 +7,25 @@ import 'package:tic_tac_toe_game/tic_tac_toe_game.dart';
 void main() {
   var gameState = TicTacToeGameState();
 
+  print("####井---字---棋####");
   while (
       gameState.status == Status.p1Turn || gameState.status == Status.p2Turn) {
-    final move = gameState.status == Status.p1Turn ? Player.p1 : Player.p2;
-    print('You are up, $move');
-    print('Pick a field:');
+    final move = gameState.status == Status.p1Turn ? 1 : 2;
     print('');
-
+    print('玩家$move下棋:');
+    print('输入要下的位置:');
+  
     printFields(gameState.fields);
 
     try {
       final field = int.parse(stdin.readLineSync(encoding: utf8) ?? '');
       gameState = gameState.claimField(field - 1);
     } catch (e) {
-      print('Invalid move, try again.');
+      print('该位置无效，请重下!\n');
     }
   }
 
-  print('Game Over: ${gameState.status}');
+  print('游戏结束!');
 }
 
 void printFields(List<Player?> fields) {
